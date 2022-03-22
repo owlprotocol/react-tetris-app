@@ -23,7 +23,7 @@ import firebase from '../firebase/firebase';
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
-  const [userName, setUserName] = useState(
+  const [name, setname] = useState(
     `Rand-${Math.floor(10000 + Math.random() * 90000)}`,
   );
   const [disabled, setDisabled] = useState(false);
@@ -54,7 +54,7 @@ const Tetris = () => {
   };
 
   const startGame = () => {
-    if (userName !== '') {
+    if (name !== '') {
       // Reset everything
       setStage(createStage());
       setDropTime(1000);
@@ -62,7 +62,7 @@ const Tetris = () => {
       setScore(0);
       setLevel(0);
       setRows(0);
-      setUserName(userName);
+      setname(name);
       setDisabled(true);
       setGameOver(false);
     } else {
@@ -86,8 +86,8 @@ const Tetris = () => {
         console.log('GAME OVER!!!');
         setGameOver(true);
         setDisabled(false);
-        console.log(`userName = ${userName}, score = ${score}`);
-        addScoreToFirestore(userName, score);
+        console.log(`name = ${name}, score = ${score}`);
+        addScoreToFirestore(name, score);
         setDropTime(null);
       }
       updatePlayerPos({ x: 0, y: 0, collided: true });
@@ -122,20 +122,20 @@ const Tetris = () => {
   };
 
   const onNameChange = (event) => {
-    const userName = event.target.value;
-    console.log(userName);
-    if (userName.length < 11) {
-      setUserName(userName);
+    const name = event.target.value;
+    console.log(name);
+    if (name.length < 11) {
+      setname(name);
       event.preventDefault();
     } else {
       alert('The user name cannot be longer than 12 chars');
     }
   };
 
-  const addScoreToFirestore = (userName, userScore) => {
+  const addScoreToFirestore = (name, score) => {
     firebase.firestore().collection('Leaderboard').add({
-      userName,
-      userScore,
+      name,
+      score,
       date: new Date(),
     });
   };
@@ -159,7 +159,7 @@ const Tetris = () => {
               <Display text={`Level: ${level}`} />
               <Input
                 text={`User name: `}
-                userName={userName}
+                name={name}
                 callback={onNameChange}
                 disabled={disabled ? 'disabled' : ''}
               />

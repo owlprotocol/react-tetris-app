@@ -28,13 +28,13 @@ const Leaderboard = ({ text, leaderboardList }) => (
   <StyledLeaderboardWrapper>
     <div>{text}</div>
     {leaderboardList
-      .sort(compareValues('userScore', 'desc'))
+      .sort(compareValues('score', 'desc'))
       .slice(0, 5)
       .map((user, i) => {
         return (
           <StyledLeaderboardRow
             key={user.id}
-          >{`${user.userName} - ${user.userScore}`}</StyledLeaderboardRow>
+          >{`${user.name} - ${user.score}`}</StyledLeaderboardRow>
         );
       })}
   </StyledLeaderboardWrapper>
