@@ -20,13 +20,10 @@ import Input from './Input';
 // Firebase
 import firebase from '../firebase/firebase';
 
-const Tetris = () => {
+const Tetris = ({ address }) => {
   const [dropTime, setDropTime] = useState(null);
   const [gameOver, setGameOver] = useState(false);
-  const [name, setname] = useState(
-    `Rand-${Math.floor(10000 + Math.random() * 90000)}`,
-  );
-  const [disabled, setDisabled] = useState(false);
+  const [name, setname] = useState(address);
 
   const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
   const [stage, setStage, rowsCleared] = useStage(player, resetPlayer);
@@ -35,8 +32,6 @@ const Tetris = () => {
   );
 
   const [setLeaderboard] = useLeaderboard();
-
-  console.log('re-render');
 
   const movePlayer = (dir) => {
     if (!checkCollision(player, stage, { x: dir, y: 0 })) {
@@ -63,7 +58,6 @@ const Tetris = () => {
       setLevel(0);
       setRows(0);
       setname(name);
-      setDisabled(true);
       setGameOver(false);
     } else {
       alert('Please enter user name!');
@@ -85,7 +79,6 @@ const Tetris = () => {
       if (player.pos.y < 1) {
         console.log('GAME OVER!!!');
         setGameOver(true);
-        setDisabled(false);
         console.log(`name = ${name}, score = ${score}`);
         addScoreToFirestore(name, score);
         setDropTime(null);
@@ -160,8 +153,7 @@ const Tetris = () => {
               <Input
                 text={`User name: `}
                 name={name}
-                callback={onNameChange}
-                disabled={disabled ? 'disabled' : ''}
+                disabled={true}
               />
               <Leaderboard
                 text={`Leaderboard:`}

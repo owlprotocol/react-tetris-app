@@ -6,7 +6,7 @@ export const StyledInputWrapper = styled.div`
   flex-direction: column;
   align-items: left;
   margin: 0 0 20px 0;
-  padding: 20px;
+  padding: 20px 10px;
   border: 4px solid #333;
   min-height: 30px;
   width: 100%;
@@ -14,7 +14,7 @@ export const StyledInputWrapper = styled.div`
   color: #999;
   background: #000;
   font-family: Pixel, Arial, Helvetica, sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.5rem;
 `;
 
 export const StyledInput = styled.input`
@@ -23,12 +23,15 @@ export const StyledInput = styled.input`
   border-right-style: hidden;
   border-left-style: hidden;
   border-bottom-style: ridge;
+  margin-top: 5px;
   flex-direction: column;
   align-items: left;
-  min-height: 30px;
+  height: fit-content;
+  max-height: 488px;
+  overflow-y: hidden
   width: 100%;
   color: #999;
   background: #000;
   font-family: Pixel, Arial, Helvetica, sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.5rem;
 `;

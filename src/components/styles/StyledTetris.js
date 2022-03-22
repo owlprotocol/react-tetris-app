@@ -17,10 +17,12 @@ export const StyledTetris = styled.div`
   margin: 0 auto;
   max-width: 900px;
 
+
   aside {
     width: 100%;
-    max-width: 200px;
+    max-width: 600px;
     display: block;
     padding: 0 20px;
+    max-height: 80vh;
   }
 `;
